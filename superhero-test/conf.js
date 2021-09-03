@@ -1,3 +1,4 @@
+const SpecReporter = require('jasmine-spec-reporter').SpecReporter
 
 exports.config ={
   framework:'jasmine2',
@@ -15,6 +16,27 @@ exports.config ={
 
 
   jasmineNodeOpts: {
-    showColors: true
-  }
+    showColors: true,
+    silent: true,
+    defaultTimeoutInterval: 360000,
+    print () {},
+  },
+  logLevel: 'WARN',
+  onPrepare: function () {
+    jasmine.getEnv().addReporter(
+      new SpecReporter({
+        spec: {
+          displayStacktrace: true,
+          displaySuccessful: true,
+        },
+        summary: {
+          displayDuration: true,
+        },
+        colors:{
+          successful:blue,
+        }
+      })
+    )
+  },
+
 }

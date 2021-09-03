@@ -84,8 +84,5 @@ describe('Roster Page Test', function(){
 
   });
 
-  it('', function(){
-
-  });
 
 });

@@ -29,7 +29,7 @@ describe('Login Page Test', function(){
     expect(navPage.heroLnk.isDisplayed()).toBeTruthy();
     expect(navPage.homeLnk.isDisplayed()).toBeTruthy();
     expect(navPage.heroFactLnk.isDisplayed()).toBeTruthy();
-    expect(navPage.logout.isDisplayed()).toBeTruthy();
+    expect(navPage.logoutLnk.isDisplayed()).toBeTruthy();
 
     navPage.heroFactModalLnks.count().then(function(itemC){
       var count = itemC;
@@ -82,6 +82,36 @@ describe('Login Page Test', function(){
                         });
       }
     });
+
+  })
+
+  it('On logout should display login page without email and pass ', function(){
+    navPage.logoutLnk.click();
+    // expect(loginPage.loginSec.isDisplayed()).toBeFalsy();
+    expect(loginPage.loginSec.isDisplayed()).toBeTruthy();
+    expect(loginPage.emailFld.getAttribute('value')).toEqual('');
+    expect(loginPage.passwordFld.getAttribute('value')).toEqual('');
+
+  })
+
+  it('on logout should display login page with email and pass if remember is checked  ', function(){
+      // logout from original
+      navPage.logoutLnk.click();
+      //enter credentials and login adding remember me
+      loginPage.emailFld.sendKeys('tester@yahoo.com');
+      loginPage.passwordFld.sendKeys('fakePassword');
+      loginPage.rememberChk.click();
+      expect(loginPage.rememberChk.isSelected()).toBeTruthy;
+      loginPage.loginBut.click();
+
+      // now log out again
+      navPage.logoutLnk.click();
+      browser.sleep(5000);
+      // expect(loginPage.loginSec.isDisplayed()).toBeFalsy();
+      expect(loginPage.loginSec.isDisplayed()).toBeTruthy();
+      expect(loginPage.emailFld.getAttribute('value')).toEqual('tester@yahoo.com');
+      expect(loginPage.passwordFld.getAttribute('value')).toEqual('fakePassword');
+      expect(loginPage.rememberChk.isSelected()).toBeTruthy;
 
   })
 

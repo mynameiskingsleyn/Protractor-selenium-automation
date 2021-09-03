@@ -108,8 +108,4 @@ describe('Login Page Test', function(){
         });
   })
 
-  it('', function(){
-
-  })
-
 });
