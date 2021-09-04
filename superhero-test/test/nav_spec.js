@@ -1,7 +1,7 @@
 // page Object file
 var LoginPage = require('../page-objects/login_page');
 var NavPage = require('../page-objects/nav_page');
-describe('Login Page Test', function(){
+describe('Nav Section Test', function(){
 
   var loginPage;
   var navPage;
@@ -50,7 +50,7 @@ describe('Login Page Test', function(){
       });
   })
 
-  it('should display modal on click', function(){
+  it('should display each modal on click', function(){
 
     navPage.heroFactModalLnks.count().then(function(itemC){
       var count = itemC;
@@ -70,7 +70,35 @@ describe('Login Page Test', function(){
                         });
 
 
-        // close the link
+        //close the modal
+        browser.actions().mouseMove({x:4,y:4}).click().perform();
+        browser.sleep(500);
+      }
+    });
+
+  })
+
+  it('should close each modal on exit', function(){
+
+    navPage.heroFactModalLnks.count().then(function(itemC){
+      var count = itemC;
+      for(var i = 0; i < count; i++){
+        // click the drop down to display links
+        navPage.heroFactLnk.click();
+        expect(navPage.heroFactModalLnks.get(i).isDisplayed()).toBe(true);
+        //click a links
+        navPage.heroFactModalLnks.get(i).click();
+        browser.sleep(500);
+        // get the modal id and vary it is open
+        navPage.heroFactModalLnks.get(i).getAttribute('data-target')
+                        .then(function(result){
+                          var el = element(by.css(result));
+                          expect(el.isDisplayed()).toBe(true);
+
+                        });
+
+
+        // // close the link
         browser.actions().mouseMove({x:4,y:4}).click().perform();
         browser.sleep(500);
         //check that it closses..

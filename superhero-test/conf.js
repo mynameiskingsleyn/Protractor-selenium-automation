@@ -1,4 +1,14 @@
 const SpecReporter = require('jasmine-spec-reporter').SpecReporter
+var HtmlScreenshotReporter = require('protractor-jasmine2-screenshot-reporter');
+
+var reporter = new HtmlScreenshotReporter({
+  reportOnlyFailedSpecs: false,
+  captureOnlyFailedSpecs: true,
+  dest: 'target/screenshots',
+  filename: 'my-report.html',
+  reportTitle: "Superhero app Report",
+  reportFailedUrl: true
+});
 
 exports.config ={
   framework:'jasmine2',
@@ -21,8 +31,22 @@ exports.config ={
     defaultTimeoutInterval: 360000,
     print () {},
   },
+  // Setup the report before any tests start
+  beforeLaunch: function() {
+    return new Promise(function(resolve){
+      reporter.beforeLaunch(resolve);
+    });
+  },
+
+  // Close the report after all tests finish
+  afterLaunch: function(exitCode) {
+    return new Promise(function(resolve){
+      reporter.afterLaunch(resolve.bind(this, exitCode));
+    });
+  },
   logLevel: 'WARN',
   onPrepare: function () {
+    jasmine.getEnv().addReporter(reporter);
     jasmine.getEnv().addReporter(
       new SpecReporter({
         spec: {
@@ -33,10 +57,10 @@ exports.config ={
           displayDuration: true,
         },
         colors:{
-          successful:blue,
+          //successful:'blue',
         }
       })
-    )
+    );
   },
 
 }

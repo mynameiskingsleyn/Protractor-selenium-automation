@@ -1,3 +1,4 @@
+
 $("#addHero-form").submit(function (event) {
     $("#addHero-Alert").addClass("hide")
 
@@ -56,17 +57,20 @@ $("#search-form").submit(function (event) {
 });
 
 $("#form-login").submit(function (event) {
+    // email = null;
+    // password = null;
     $("#login-alert").addClass("hide")
 
     if ($("#loginEmail").val() == "" || $("#loginPassword").val() == "") {
         $("#login-alert").removeClass("hide")
     } else {
         if ($("#rememberLoginChk").is(":checked")) {
-            var email = $("#loginEmail").text()
-            var password = $("#loginPassword").text()
+            // var email = $("#loginEmail").text()
+            // password = $("#loginPassword").text()
         } else {
             $("#loginEmail").val("")
             $("#loginPassword").val("")
+            $("rememberLoginChk").checked=false;
         }
         $("#overlay").addClass("hide")
     }
@@ -76,6 +80,7 @@ $("#form-login").submit(function (event) {
 
 function logout() {
     $("#overlay").removeClass("hide")
-    $("#loginEmail").val(email)
-    $("#loginPassword").val(password)
+    // $("#loginEmail").val(email)
+    // $("#loginPassword").val(password);
+
 }

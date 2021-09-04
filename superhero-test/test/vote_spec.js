@@ -1,6 +1,6 @@
 var LoginPage = require('../page-objects/login_page');
 var VotePage = require('../page-objects/vote_page');
-describe('Login Page Test', function(){
+describe('Vote  Test', function(){
 
   var loginPage;
   var votePage;

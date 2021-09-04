@@ -2,7 +2,7 @@
 var LoginPage = require('../page-objects/login_page');
 var BasePage = require('../page-objects/base_page');
 var HeaderPage = require('../page-objects/header_page');
-describe('Login Page Test', function(){
+describe('Header Page Test', function(){
   var loginPage;
   var headerPage;
   var basePage;
